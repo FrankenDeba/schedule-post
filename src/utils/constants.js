@@ -1,0 +1,3 @@
+export const DATABASE_URL = "https://hwvqlobhqjqzcmmuxhnt.supabase.co";
+export const DATABASE_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh3dnFsb2JocWpxemNtbXV4aG50Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTY1NDQ1MjQsImV4cCI6MjAzMjEyMDUyNH0.tldY_OSWR-MRy9jk3WWtHJFN3yijR7nrO_I3NlHweBg";

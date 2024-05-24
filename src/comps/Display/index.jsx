@@ -4,7 +4,7 @@ import Store from "../../store";
 import "./Display.css";
 import Header from "../Header";
 
-export default function Display() {
+export default function Display({ database }) {
   const store = useContext(Store);
 
   const { dispatch, state } = store;
@@ -13,6 +13,13 @@ export default function Display() {
   useEffect(() => {
     console.log({ state });
   }, [state]);
+
+  async function updateShowableInDB(id) {
+    const { data, error } = await database
+      .from("posts")
+      .update({ should_show: "true" })
+      .eq("post_id", id);
+  }
 
   function timeChecker() {
     console.log("pppp");
@@ -33,6 +40,7 @@ export default function Display() {
         if (currTime === note.time) {
           console.log("your time has come: ", { note });
           note.shouldShow = true;
+          updateShowableInDB(note.id);
           dispatch({
             type: "show",
             payload: note,

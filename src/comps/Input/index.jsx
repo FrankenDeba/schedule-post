@@ -8,12 +8,24 @@ import Datepicker from "../Datepicker";
 import "./Input.css";
 import Header from "../Header";
 
-export default function Input({ setNote }) {
+export default function Input({ database }) {
   const currentTimeStr = `${new Date().getDate()}:${new Date().getMonth()}:${new Date().getFullYear()}:${new Date().getHours()}:${new Date().getMinutes()}`;
   const [timeState, setTimeState] = useState("");
   const store = useContext(Store);
 
   const { dispatch, state } = store;
+
+  async function addToDB({ id, text, timeState }) {
+    const { data, error } = await database.from("posts").insert([
+      {
+        post_content: text,
+        post_id: id,
+        post_schedule: timeState,
+      },
+    ]);
+
+    console.log({ data, error });
+  }
 
   useEffect(() => {
     console.log({ state });
@@ -56,10 +68,17 @@ export default function Input({ setNote }) {
           // toast.success(
           //   "Thanks for submitting your post, it will be live in the provided time!"
           // );
+          const id = uuidv4();
+          addToDB({
+            id,
+            text,
+            timeState,
+          });
+
           dispatch({
             type: "add",
             payload: {
-              id: uuidv4(),
+              id,
               text,
               time: timeState,
               shouldShow: false,
