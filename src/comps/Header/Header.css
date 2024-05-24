@@ -1,0 +1,7 @@
+.header {
+  width: 100%;
+  background-color: lightcyan;
+  box-shadow: 0 0 10px cyan;
+  padding: 10px;
+  color: steelblue;
+}

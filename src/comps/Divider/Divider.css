@@ -1,0 +1,5 @@
+.divider {
+  height: 80vh;
+  border-left: 2px dashed #ddd;
+  margin: 40px 0;
+}

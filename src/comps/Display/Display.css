@@ -1,0 +1,7 @@
+.display_cont {
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  align-items: center;
+  width: 250px;
+}

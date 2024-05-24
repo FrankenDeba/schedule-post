@@ -1,0 +1,7 @@
+.note_cont {
+  border: 2px solid cyan;
+  padding: 15px 25px;
+  height: 250px;
+  width: 500px;
+  overflow: auto;
+}
