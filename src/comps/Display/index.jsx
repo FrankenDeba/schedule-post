@@ -10,10 +10,6 @@ export default function Display({ database }) {
   const { dispatch, state } = store;
   let { notes } = state;
 
-  useEffect(() => {
-    console.log({ state });
-  }, [state]);
-
   async function updateShowableInDB(id) {
     try {
       const { error } = await database
@@ -37,19 +33,11 @@ export default function Display({ database }) {
   }
 
   function timeChecker() {
-    console.log("pppp");
     const t = setInterval(() => {
       let currTime = formatTime();
-      console.log("ttt", { notes }, JSON.stringify(currTime));
       notes = notes.map((note) => {
-        console.log("your time has not come:", {
-          currTime,
-          nextTime: note.time,
-        });
-        console.log("note.time", note.time);
         const postScheduleTime = formatTime(note.time);
         if (currTime === postScheduleTime) {
-          console.log("your time has come: ", { note });
           note.shouldShow = true;
           updateShowableInDB(note.id);
           dispatch({
@@ -72,12 +60,7 @@ export default function Display({ database }) {
   return (
     <div className="display_cont">
       <Header text={"Your posts..."} />
-      <div
-        className="notes_cont"
-        // style={{
-        //   maxHeight: "100vh",
-        // }}
-      >
+      <div className="notes_cont">
         {!notes.length ? (
           <p className="loader">Loading...</p>
         ) : (

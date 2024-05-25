@@ -9,7 +9,6 @@ export default function Note({ note }) {
   const { text, time } = note;
 
   useEffect(() => {
-    console.log({ showables });
     setPostedAt(
       `${Intl.DateTimeFormat(navigator.language, {
         weekday: "long",
@@ -23,7 +22,6 @@ export default function Note({ note }) {
           hour12: true,
         }).format(new Date(time))}`
     );
-    console.log("inside note: ");
   }, [showables]);
 
   return showables[note.id] ? (

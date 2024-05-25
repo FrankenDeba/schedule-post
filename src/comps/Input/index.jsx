@@ -1,10 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Store from "../../store";
 import Datepicker from "../Datepicker";
-// import { dispatch } from "../../store";
 import "./Input.css";
 import Header from "../Header";
 
@@ -23,34 +22,14 @@ export default function Input({ database }) {
         post_schedule: timeState,
       },
     ]);
-
-    console.log({ data, error });
   }
 
-  useEffect(() => {
-    console.log({ state });
-  }, [state]);
   const [text, setText] = useState("");
 
   function setTime(time) {
-    console.log({ time }, "<-- set time via date picker");
-    // let timeStr = `${new Date(time).getDate()}:${new Date(
-    //   time
-    // ).getMonth()}:${new Date(time).getFullYear()}:${new Date(
-    //   time
-    // ).getHours()}:${new Date(time).getMinutes()}`;
-
     setTimeState(time);
-    console.log(
-      "formatted time: "
-      // timeStr
-      // `${new Date(time).getDate()}:${new Date(time).getHours()}:${new Date(
-      //   time
-      // ).getMinutes()}`
-    );
-    // timeRef.current = timeStr;
-    // console.log({ time: timeRef.current });
   }
+
   return (
     <div className="input_cont">
       <Header text="Share your thoughts..." />

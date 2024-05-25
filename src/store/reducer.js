@@ -8,7 +8,6 @@ export const reducer = (state, action) => {
       };
 
     case "add":
-      console.log("adding to reducer: ", action.payload);
       return {
         ...state,
         notes: [...state.notes, action.payload],
@@ -21,11 +20,7 @@ export const reducer = (state, action) => {
       let note = state.notes[noteIdx];
 
       note = { ...note, shouldShow: true };
-      // console.log(
-      //   "setting show in reducer ttt",
-      //   action.payload,
-      //   state.notes.splice(noteIdx, 1, note)
-      // );
+
       const showables = state.showables;
       showables[action.payload.id] = true;
 

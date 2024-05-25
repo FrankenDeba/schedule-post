@@ -1,9 +1,7 @@
 import React, { useReducer, useRef, useState } from "react";
 import "./App.css";
-// import { useShouldUpdate } from "./utils/useShouldUpdate";
 import { useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-import Datepicker from "./comps/Datepicker";
 import Store from "./store";
 
 import { reducer } from "./store/reducer";
@@ -21,7 +19,6 @@ function App() {
   });
 
   useEffect(() => {
-    console.log("notes from database: ", { notes, showables });
     dispatch({
       type: "init",
       payload: {
@@ -39,8 +36,6 @@ function App() {
       if (error) {
         throw new Error("Database select error");
       }
-
-      console.log({ data }, "supabase");
       const postMap = new Map();
       data.forEach((post) => postMap.set(post.post_id, post));
       const uniquePosts = Array.from(postMap.values());
@@ -70,58 +65,6 @@ function App() {
   useEffect(() => {
     getDatabase();
   }, []);
-
-  // const {store}
-  // const upd = useShouldUpdate(
-  //   1,
-  //   `${new Date().getDate()}:${new Date().getHours()}:${new Date().getMinutes()}`
-  // );
-
-  useEffect(() => {
-    console.log({ store: Store.store });
-  }, [Store]);
-
-  // let time = React.createRef();
-
-  // let timeRef = useRef(
-  //   `${new Date().getDate()}:${new Date().getHours()}:${new Date().getMinutes()}`
-  // );
-
-  // function setTime(time) {
-  //   console.log({ time });
-  //   let timeStr = `${new Date(time).getDate()}:${new Date(
-  //     time
-  //   ).getMonth()}:${new Date(time).getFullYear()}:${new Date(
-  //     time
-  //   ).getHours()}:${new Date(time).getMinutes()}`;
-  //   console.log(
-  //     "formatted time: ",
-  //     time
-  //     // `${new Date(time).getDate()}:${new Date(time).getHours()}:${new Date(
-  //     //   time
-  //     // ).getMinutes()}`
-  //   );
-  //   timeRef.current = timeStr;
-  //   console.log({ time: timeRef.current });
-  // }
-
-  // useEffect(() => {
-  //   const t = setInterval(() => {
-  //     let currTime = `${new Date().getDate()}:${new Date().getHours()}:${new Date().getMinutes()}`;
-  //     if (JSON.stringify(currTime) === JSON.stringify(timeRef.current)) {
-  //       console.log("now!");
-  //     } else {
-  //       console.log(
-  //         "not now!",
-  //         JSON.stringify(currTime),
-  //         JSON.stringify(timeRef.current)
-  //       );
-  //     }
-  //   }, 60 * 1000);
-
-  // if ()
-  // console.log(upd);
-  // }, [timeRef.current]);
 
   return (
     <div className="App">
