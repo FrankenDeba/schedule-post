@@ -1,4 +1,4 @@
-import React, { useReducer, useRef, useState } from "react";
+import React, { useReducer, useState } from "react";
 import "./App.css";
 import { useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
@@ -39,17 +39,12 @@ function App() {
       const postMap = new Map();
       data.forEach((post) => postMap.set(post.post_id, post));
       const uniquePosts = Array.from(postMap.values());
-      const postsState = uniquePosts
-        .map((post) => ({
-          id: post.post_id,
-          time: post.post_schedule,
-          shouldShow: post.should_show,
-          text: post.post_content,
-        }))
-        .sort(
-          (postA, postB) =>
-            new Date(postB.time).getTime() - new Date(postA.time).getTime()
-        );
+      const postsState = uniquePosts.map((post) => ({
+        id: post.post_id,
+        time: post.post_schedule,
+        shouldShow: post.should_show,
+        text: post.post_content,
+      }));
 
       const showables_obj = {};
       postsState.forEach((post) => {

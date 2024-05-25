@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Note from "../Note";
 import Store from "../../store";
 import "./Display.css";
@@ -9,6 +9,7 @@ export default function Display({ database }) {
 
   const { dispatch, state } = store;
   let { notes } = state;
+  const [notesState, setNotesState] = useState(notes);
 
   async function updateShowableInDB(id) {
     try {
@@ -31,6 +32,15 @@ export default function Display({ database }) {
       time
     ).getMinutes()}`;
   }
+
+  useEffect(() => {
+    setNotesState(
+      notes.sort(
+        (postA, postB) =>
+          new Date(postB.time).getTime() - new Date(postA.time).getTime()
+      )
+    );
+  }, [notes]);
 
   function timeChecker() {
     const t = setInterval(() => {
@@ -61,10 +71,10 @@ export default function Display({ database }) {
     <div className="display_cont">
       <Header text={"Your posts..."} />
       <div className="notes_cont">
-        {!notes.length ? (
-          <p className="loader">Loading...</p>
+        {notesState.length ? (
+          notesState.map((note) => <Note note={note} />)
         ) : (
-          notes.map((note) => <Note note={note} />)
+          <p className="loader">Loading...</p>
         )}
       </div>
     </div>
