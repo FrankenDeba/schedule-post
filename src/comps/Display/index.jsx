@@ -15,29 +15,44 @@ export default function Display({ database }) {
   }, [state]);
 
   async function updateShowableInDB(id) {
-    const { data, error } = await database
-      .from("posts")
-      .update({ should_show: "true" })
-      .eq("post_id", id);
+    //   {
+    //     post_id: id,
+    //   },
+    // ]);
+    try {
+      const { error } = await database
+        .from("posts")
+        .update({ should_show: "true" })
+        .eq("post_id", id);
+      if (error) {
+        throw new Error("Database update error!");
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  function formatTime(time = new Date()) {
+    return `${new Date(time).getDate()}:${new Date(time).getMonth()}:${new Date(
+      time
+    ).getFullYear()}:${new Date(time).getHours()}:${new Date(
+      time
+    ).getMinutes()}`;
   }
 
   function timeChecker() {
     console.log("pppp");
     const t = setInterval(() => {
-      let currTime = `${new Date().getDate()}:${new Date().getMonth()}:${new Date().getFullYear()}:${new Date().getHours()}:${new Date().getMinutes()}`;
-      console.log(
-        "ttt",
-        { notes },
-        JSON.stringify(currTime)
-        // JSON.stringify(notes[0]?.time)
-      );
+      let currTime = formatTime();
+      console.log("ttt", { notes }, JSON.stringify(currTime));
       notes = notes.map((note) => {
         console.log("your time has not come:", {
           currTime,
           nextTime: note.time,
         });
         console.log("note.time", note.time);
-        if (currTime === note.time) {
+        const postScheduleTime = formatTime(note.time);
+        if (currTime === postScheduleTime) {
           console.log("your time has come: ", { note });
           note.shouldShow = true;
           updateShowableInDB(note.id);

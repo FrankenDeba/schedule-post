@@ -20,6 +20,8 @@ const Datepicker = ({ setTime }) => {
         selected={startDate}
         onChange={(date) => {
           if (date.getTime() < new Date().getTime()) {
+            alert("Invalid time!");
+            // TODO: toast is breaking!
             // toast.error("Invalid date: please select a future date");
             return;
           }

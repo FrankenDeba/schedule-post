@@ -1,7 +1,11 @@
 .note_cont {
-  border: 2px solid cyan;
+  border: 2px dashed #ddd;
   padding: 15px 25px;
   height: 250px;
-  width: 500px;
+  width: 50vw;
   overflow: auto;
+  box-shadow: 0 0 10px #ddd;
+  margin: 10px;
+  padding: 15px 10px;
+  color: steelblue;
 }

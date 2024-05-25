@@ -20,18 +20,46 @@ function App() {
     showables,
   });
 
+  useEffect(() => {
+    console.log("notes from database: ", { notes, showables });
+    dispatch({
+      type: "init",
+      payload: {
+        notes,
+        showables,
+      },
+    });
+  }, [notes, showables]);
+
   const database = createClient(DATABASE_URL, DATABASE_KEY);
 
   async function getDatabase() {
-    const data = await database.from("posts").select();
-    console.log({ data });
-    data.data.forEach((d) => {
-      setNotes({
-        text: d.post_content,
-        id: d.post_id,
-        time: d.post_schedule,
+    try {
+      const { data, error } = await database.from("posts").select();
+      if (error) {
+        throw new Error("Database select error");
+      }
+
+      console.log({ data }, "supabase");
+      const postMap = new Map();
+      data.forEach((post) => postMap.set(post.post_id, post));
+      const uniquePosts = Array.from(postMap.values());
+      const postsState = uniquePosts.map((post) => ({
+        id: post.post_id,
+        time: post.post_schedule,
+        shouldShow: post.should_show,
+        text: post.post_content,
+      }));
+
+      const showables_obj = {};
+      postsState.forEach((post) => {
+        showables_obj[post.id] = post.shouldShow;
       });
-    });
+      setShowables(showables_obj);
+      setNotes(postsState);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   useEffect(() => {

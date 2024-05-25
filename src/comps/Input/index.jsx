@@ -34,16 +34,16 @@ export default function Input({ database }) {
 
   function setTime(time) {
     console.log({ time }, "<-- set time via date picker");
-    let timeStr = `${new Date(time).getDate()}:${new Date(
-      time
-    ).getMonth()}:${new Date(time).getFullYear()}:${new Date(
-      time
-    ).getHours()}:${new Date(time).getMinutes()}`;
+    // let timeStr = `${new Date(time).getDate()}:${new Date(
+    //   time
+    // ).getMonth()}:${new Date(time).getFullYear()}:${new Date(
+    //   time
+    // ).getHours()}:${new Date(time).getMinutes()}`;
 
-    setTimeState(timeStr);
+    setTimeState(time);
     console.log(
-      "formatted time: ",
-      timeStr
+      "formatted time: "
+      // timeStr
       // `${new Date(time).getDate()}:${new Date(time).getHours()}:${new Date(
       //   time
       // ).getMinutes()}`

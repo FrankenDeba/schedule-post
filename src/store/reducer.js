@@ -1,5 +1,12 @@
 export const reducer = (state, action) => {
   switch (action.type) {
+    case "init":
+      return {
+        ...state,
+        notes: action.payload.notes,
+        showables: action.payload.showables,
+      };
+
     case "add":
       console.log("adding to reducer: ", action.payload);
       return {
