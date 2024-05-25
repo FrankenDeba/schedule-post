@@ -3,7 +3,20 @@
   flex-direction: column;
   padding: 25px;
   align-items: center;
-  /* width: 250px; */
-  max-height: 100vh;
-  overflow-y: auto;
+  width: 500px;
+
+  /* max-height: 100vh; */
+  /* height: 100vh; */
+}
+
+.notes_cont {
+  height: 100vh;
+  overflow: auto;
+  margin: 10px;
+}
+
+.loader {
+  font-size: 36px;
+  width: 100%;
+  text-align: center;
 }

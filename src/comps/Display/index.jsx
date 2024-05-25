@@ -15,10 +15,6 @@ export default function Display({ database }) {
   }, [state]);
 
   async function updateShowableInDB(id) {
-    //   {
-    //     post_id: id,
-    //   },
-    // ]);
     try {
       const { error } = await database
         .from("posts")
@@ -76,9 +72,18 @@ export default function Display({ database }) {
   return (
     <div className="display_cont">
       <Header text={"Your posts..."} />
-      {notes.map((note) => (
-        <Note note={note} />
-      ))}
+      <div
+        className="notes_cont"
+        // style={{
+        //   maxHeight: "100vh",
+        // }}
+      >
+        {!notes.length ? (
+          <p className="loader">Loading...</p>
+        ) : (
+          notes.map((note) => <Note note={note} />)
+        )}
+      </div>
     </div>
   );
 }

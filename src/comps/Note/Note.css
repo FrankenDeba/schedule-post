@@ -1,5 +1,6 @@
 .note_cont {
   border: 2px dashed #ddd;
+  text-align: left;
   padding: 15px 25px;
   height: 250px;
   width: 50vw;
@@ -8,4 +9,9 @@
   margin: 10px;
   padding: 15px 10px;
   color: steelblue;
+  background-color: #fff;
+}
+
+.note_cont p {
+  color: darkslategray;
 }

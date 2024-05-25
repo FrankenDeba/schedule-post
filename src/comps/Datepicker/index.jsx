@@ -12,7 +12,7 @@ const Datepicker = ({ setTime }) => {
   return (
     <div className="dp_cont">
       <ToastContainer />
-      <label for="dp">Post by:</label>
+      <label for="dp">Post by: </label>
       <DatePicker
         id="dp"
         // selected={startDate}
