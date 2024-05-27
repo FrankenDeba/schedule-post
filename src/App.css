@@ -1,15 +1,11 @@
 .App {
   text-align: center;
-  /* background-color: #f5ebe0; */
 }
 
 .main_cont {
   display: flex;
   justify-content: space-between;
   width: 100vw;
-  /* justify-content: center;
-  
-  align-items: center; */
 }
 
 @media screen and (max-width: 500px) {

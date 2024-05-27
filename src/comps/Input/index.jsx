@@ -8,20 +8,27 @@ import "./Input.css";
 import Header from "../Header";
 
 export default function Input({ database }) {
-  const currentTimeStr = `${new Date().getDate()}:${new Date().getMonth()}:${new Date().getFullYear()}:${new Date().getHours()}:${new Date().getMinutes()}`;
   const [timeState, setTimeState] = useState("");
   const store = useContext(Store);
 
-  const { dispatch, state } = store;
+  const { dispatch } = store;
 
   async function addToDB({ id, text, timeState }) {
-    const { data, error } = await database.from("posts").insert([
-      {
-        post_content: text,
-        post_id: id,
-        post_schedule: timeState,
-      },
-    ]);
+    try {
+      const { error } = await database.from("posts").insert([
+        {
+          post_content: text,
+          post_id: id,
+          post_schedule: timeState,
+        },
+      ]);
+
+      if (error) {
+        throw new Error("Database error: ", error);
+      }
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   const [text, setText] = useState("");

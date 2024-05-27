@@ -1,7 +1,7 @@
 import "./Header.css";
 
 function Header({ text }) {
-  return <div className="header">{text}</div>;
+  return <h1 className="header">{text}</h1>;
 }
 
 export default Header;
