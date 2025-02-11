@@ -9,7 +9,7 @@ import Input from "./comps/Input";
 import Display from "./comps/Display";
 import Divider from "./comps/Divider";
 import { DATABASE_KEY, DATABASE_URL } from "./utils/constants";
-
+// test
 function App() {
   const [notes, setNotes] = useState([]);
   const [showables, setShowables] = useState({});
